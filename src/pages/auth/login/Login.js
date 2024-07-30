@@ -1,8 +1,8 @@
-import Input from '../../../components/input/Input';
-import Button from '../../../components/button/Button';
-import './Login.scss';
+import Input from '@components/input/Input';
+import Button from '@components/button/Button';
+import '@pages/auth/login/Login.scss';
 import { useState, useEffect } from 'react';
-import { authService } from '../../../services/api/auth/auth.service';
+import { authService } from '@services/api/auth/auth.service';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 

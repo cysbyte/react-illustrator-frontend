@@ -6,6 +6,7 @@ import { Utils } from '@services/utils/utils.service';
 import { authService } from '@services/api/auth/auth.service';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '@hooks/useLocalStorage';
+import useSessionStorage from '@hooks/useSessionStorage';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -18,6 +19,7 @@ const Register = () => {
   const [user, setUser] = useState();
   const [setStoredUsername] = useLocalStorage('username', 'set');
   const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
+  const [pageReload] = useSessionStorage('pageReload', 'set');
 
   const navigate = useNavigate();
 
@@ -42,6 +44,7 @@ const Register = () => {
       setUser(result.data.user);
       setHasError(false);
       setAlertType('alert-success');
+      Utils.dispatchUser(result, pageReload);
     } catch (error) {
       setLoading(false);
       setHasError(true);

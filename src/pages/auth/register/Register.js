@@ -4,6 +4,7 @@ import './Register.scss';
 import { useState, useEffect } from 'react';
 import { Utils } from '../../../services/utils/utils.service';
 import { authService } from '../../../services/api/auth/auth.service';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +14,8 @@ const Register = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [alertType, setAlertType] = useState('');
   const [hasError, setHasError] = useState(false);
-  const [user] = useState();
+  const [user, setUser] = useState();
+  const navigate = useNavigate();
 
   const registerUser = async (event) => {
     setLoading(true);
@@ -30,6 +32,7 @@ const Register = () => {
       });
       console.log(result);
 
+      setUser(result.data.user);
       setHasError(false);
       setAlertType('alert-success');
     } catch (error) {

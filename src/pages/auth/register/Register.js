@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Utils } from '@services/utils/utils.service';
 import { authService } from '@services/api/auth/auth.service';
 import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '@hooks/useLocalStorage';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +16,9 @@ const Register = () => {
   const [alertType, setAlertType] = useState('');
   const [hasError, setHasError] = useState(false);
   const [user, setUser] = useState();
+  const [setStoredUsername] = useLocalStorage('username', 'set');
+  const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
+
   const navigate = useNavigate();
 
   const registerUser = async (event) => {
@@ -31,6 +35,9 @@ const Register = () => {
         avatarImage
       });
       console.log(result);
+
+      setLoggedIn(true);
+      setStoredUsername(username);
 
       setUser(result.data.user);
       setHasError(false);

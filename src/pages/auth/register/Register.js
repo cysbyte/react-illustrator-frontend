@@ -1,10 +1,12 @@
-import Input from '../../../components/input/Input';
-import Button from '../../../components/button/Button';
-import './Register.scss';
+import Input from '@components/input/Input';
+import Button from '@components/button/Button';
+import '@pages/auth/register/Register.scss';
 import { useState, useEffect } from 'react';
-import { Utils } from '../../../services/utils/utils.service';
-import { authService } from '../../../services/api/auth/auth.service';
+import { Utils } from '@services/utils/utils.service';
+import { authService } from '@services/api/auth/auth.service';
 import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '@hooks/useLocalStorage';
+import useSessionStorage from '@hooks/useSessionStorage';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +17,10 @@ const Register = () => {
   const [alertType, setAlertType] = useState('');
   const [hasError, setHasError] = useState(false);
   const [user, setUser] = useState();
+  const [setStoredUsername] = useLocalStorage('username', 'set');
+  const [setLoggedIn] = useLocalStorage('keepLoggedIn', 'set');
+  const [pageReload] = useSessionStorage('pageReload', 'set');
+
   const navigate = useNavigate();
 
   const registerUser = async (event) => {
@@ -32,9 +38,13 @@ const Register = () => {
       });
       console.log(result);
 
+      setLoggedIn(true);
+      setStoredUsername(username);
+
       setUser(result.data.user);
       setHasError(false);
       setAlertType('alert-success');
+      Utils.dispatchUser(result, pageReload);
     } catch (error) {
       setLoading(false);
       setHasError(true);

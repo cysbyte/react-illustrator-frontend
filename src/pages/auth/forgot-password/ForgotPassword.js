@@ -1,9 +1,9 @@
-import Input from '../../../components/input/Input';
-import Button from '../../../components/button/Button';
+import Input from '@components/input/Input';
+import Button from '@components/button/Button';
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import './ForgotPassword.scss';
-import backgroundImage from '../../../assets/images/background.jpg';
+import '@pages/auth/forgot-password/ForgotPassword.scss';
+import backgroundImage from '@assets/images/background.jpg';
 
 const ForgotPassword = () => {
   return (

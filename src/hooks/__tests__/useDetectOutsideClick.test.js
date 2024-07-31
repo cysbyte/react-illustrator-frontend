@@ -1,6 +1,6 @@
 import useDetectOutsideClick from '@hooks/useDetectOutsideClick';
 import { renderHook } from '@root/test.utils';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 const windowAddEventListenerSpy = jest.spyOn(window, 'addEventListener');
 const windowRemoveEventListenerSpy = jest.spyOn(window, 'removeEventListener');

@@ -36,15 +36,11 @@ const Register = () => {
         avatarColor,
         avatarImage
       });
-      console.log(result);
 
       setLoggedIn(true);
       setStoredUsername(username);
-
-      setUser(result.data.user);
-      setHasError(false);
       setAlertType('alert-success');
-      Utils.dispatchUser(result, pageReload);
+      Utils.dispatchUser(result, pageReload, dispatch, setUser);
     } catch (error) {
       setLoading(false);
       setHasError(true);
